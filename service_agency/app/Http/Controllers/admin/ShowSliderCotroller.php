@@ -36,9 +36,7 @@ class ShowSliderCotroller extends Controller
                 $imagePath = $request->file('image')->store($path, 'public');
                 $update_slider->image = $imagePath;
             
-        } else {
-            return back()->withErrors(['image' => 'No image uploaded.']);
-        }
+        } 
 
         $update_slider->description = $request->input('description');
         $update_slider->title = $request->input('title');

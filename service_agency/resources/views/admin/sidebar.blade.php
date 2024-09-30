@@ -74,8 +74,11 @@
                             </a>
                           
                         </div>
+                        <a href="{{ route('show_contact_form_details') }}" class="nav-item nav-link">
+                        <i class="fa fa-tachometer-alt me-2"></i>User Contact Form Data
+                    </a>
                     </div>
-                    
+                        
                     </div>
                 </div>
             </nav>

@@ -23,6 +23,10 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="{{asset('user_assets/css/bootstrap.min.css')}}" rel="stylesheet">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
         <!-- Template Stylesheet -->
         <link href="{{asset('user_assets/css/style.css')}}" rel="stylesheet">

@@ -10,6 +10,9 @@ use App\Http\Controllers\admin\AddSliderController;
 use App\Http\Controllers\admin\ShowSliderCotroller;
 use App\Http\Controllers\admin\AddServiceController;
 use App\Http\Controllers\admin\ShowServiceController;
+use App\Http\Controllers\admin\ShowContactFormController;
+use App\Http\Controllers\user\ContactUsController;
+use App\Http\Controllers\admin\AddContactDetailsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +40,12 @@ Route::get('/admin/show_service', [ShowServiceController::class, 'show_service']
 Route::get('/admin/delete_service/{id}', [ShowServiceController::class, 'delete_service'])->name('delete_service');
 Route::get('/admin/service_edit_form/{id}', [ShowServiceController::class, 'service_edit_form'])->name('service_edit_form');
 Route::post('/admin/update_service/{id}', [ShowServiceController::class, 'update_service'])->name('update_service');
+
+Route::post('/contact_us', [ContactUsController::class, 'contact_us'])->name('contact_us');
+Route::get('/admin/show/contact_us', [ShowContactFormController::class, 'show_contact_form_details'])->name('show_contact_form_details');
+
+Route::get('/admin/add_contact_form', [AddContactDetailsController::class, 'add_contact_form'])->name('add_contact_form');
+Route::post('/admin/add_contact_details', [AddContactDetailsController::class, 'add_contact_details'])->name('add_contact_details');
 
 
 Route::middleware([

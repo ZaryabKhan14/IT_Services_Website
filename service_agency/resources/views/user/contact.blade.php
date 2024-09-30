@@ -1,10 +1,12 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 <!-- Contact Start -->
 <div class="container-fluid py-5 mb-5">
             <div class="container">
                 <div class="text-center mx-auto pb-5 wow fadeIn" data-wow-delay=".3s" style="max-width: 600px;">
                     <h5 class="text-primary">Get In Touch</h5>
                     <h1 class="mb-3">Contact for any query</h1>
-                    <p class="mb-2">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                    <!-- <p class="mb-2">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p> -->
                 </div>
                 <div class="contact-detail position-relative p-5">
                     <div class="row g-5 mb-5 justify-content-center">
@@ -50,25 +52,107 @@
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay=".5s">
                             <div class="p-5 rounded contact-form">
-                                <div class="mb-4">
-                                    <input type="text" class="form-control border-0 py-3" placeholder="Your Name">
-                                </div>
-                                <div class="mb-4">
-                                    <input type="email" class="form-control border-0 py-3" placeholder="Your Email">
-                                </div>
-                                <div class="mb-4">
-                                    <input type="text" class="form-control border-0 py-3" placeholder="Project">
-                                </div>
-                                <div class="mb-4">
-                                    <textarea class="w-100 form-control border-0 py-3" rows="6" cols="10" placeholder="Message"></textarea>
-                                </div>
-                                <div class="text-start">
-                                    <button class="btn bg-primary text-white py-3 px-5" type="button">Send Message</button>
-                                </div>
+                            <form id="contactForm" action="{{ route('contact_us') }}" method="POST" class="contact-form">
+                            @csrf
+                            <div class="mb-4">
+                                <input name="name" type="text" class="form-control border-0 py-3" placeholder="Your Name" required>
+                                @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                        </div>
+                            <div class="mb-4">
+                                <input name="email" type="email" class="form-control border-0 py-3" placeholder="Your Email" required>
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-4">
+                                <input name="number" type="number" class="form-control border-0 py-3" placeholder="Your Number" required>
+                                @error('number')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-4">
+                                <input name="Project" type="text" class="form-control border-0 py-3" placeholder="Project" required>
+                                @error('Project')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-4">
+                                <textarea name="message" class="w-100 form-control border-0 py-3" rows="6" cols="10" placeholder="Message" required></textarea>
+                                @error('message')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="text-start">
+                                <button class="btn bg-primary text-white py-3 px-5" type="submit">Send Message</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
-        <!-- Contact End -->
+    </div>
+</div>
+<!-- Contact End -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('contactForm');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to send this message?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, send it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Create a FormData object to send the form data
+                    const formData = new FormData(form);
+                    
+                    // Use fetch to send the form data to the server
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Show success message using SweetAlert
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: data.message,
+                                confirmButtonText: 'OK'
+                            });
+                            form.reset(); // Optionally reset the form
+                        } else {
+                            // Show error message using SweetAlert
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Something went wrong. Please try again.',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'There was a problem with the request. Please try again.',
+                            confirmButtonText: 'OK'
+                        });
+                    });
+                }
+            });
+        });
+    });
+</script>

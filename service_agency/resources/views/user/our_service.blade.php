@@ -5,20 +5,22 @@
                     <h5 class="text-primary">Our Services</h5>
                     <h1>Services Built Specifically For Your Business</h1>
                 </div>
+                @foreach($service as $our_service)
                 <div class="row g-5 services-inner">
                     <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".3s">
                         <div class="services-item bg-light">
                             <div class="p-4 text-center services-content">
                                 <div class="services-content-icon">
-                                    <i class="fa fa-code fa-7x mb-4 text-primary"></i>
-                                    <h4 class="mb-3">Web Design</h4>
-                                    <p class="mb-4">Lorem ipsum dolor sit amet elit. Sed efficitur quis purus ut interdum. Aliquam dolor eget urna ultricies tincidunt.</p>
+                                <i class="{{ $our_service->service_icon }} fa-7x mb-4 text-primary"></i>
+                                <h4 class="mb-3">{{$our_service->service_name}}</h4>
+                                    <p class="mb-4">{{$our_service->service_description}}</p>
                                     <a href="" class="btn btn-secondary text-white px-5 py-3 rounded-pill">Read More</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
+                    @endforeach
+                    <!-- <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay=".5s">
                         <div class="services-item bg-light">
                             <div class="p-4 text-center services-content">
                                 <div class="services-content-icon">
@@ -81,5 +83,5 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Services End -->

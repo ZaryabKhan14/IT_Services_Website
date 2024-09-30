@@ -8,10 +8,12 @@
         <!-- Topbar Start -->
         <div class="container-fluid bg-dark py-2 d-none d-md-flex">
             <div class="container">
+            
+
                 <div class="d-flex justify-content-between topbar">
                     <div class="top-info">
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>23 Ranking Street, New York</small>
-                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>Email@Example.com</small>
+                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-map-marker-alt me-2 text-secondary"></i></a>{{$contact_details->contact_address}}</small>
+                        <small class="me-3 text-white-50"><a href="#"><i class="fas fa-envelope me-2 text-secondary"></i></a>{{$contact_details->contact_email}}</small>
                     </div>
                     <div id="note" class="text-secondary d-none d-xl-flex"><small>Note : We help you to Grow your Business</small></div>
                     <div class="top-link">
@@ -40,7 +42,7 @@
                             <a href="index.html" class="nav-item nav-link active text-secondary">Home</a>
                             <a href="about.html" class="nav-item nav-link">About</a>
                             <a href="service.html" class="nav-item nav-link">Services</a>
-                            <a href="project.html" class="nav-item nav-link">Projects</a>
+                            <!-- <a href="project.html" class="nav-item nav-link">Projects</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded">
@@ -49,7 +51,7 @@
                                     <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                                     <a href="404.html" class="dropdown-item">404 Page</a>
                                 </div>
-                            </div>
+                            </div> -->
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
                     </div>
@@ -64,7 +66,9 @@
                         </div>
                         <div class="d-flex flex-column pe-4 border-end">
                             <span class="text-white-50">Have any questions?</span>
-                            <span class="text-secondary">Call: + 0123 456 7890</span>
+                            <span class="text-secondary">Call: + {{$contact_details->contact_number}}</span>
+                            
+
                         </div>
                         <div class="d-flex align-items-center justify-content-center ms-4 ">
                             <a href="#"><i class="bi bi-search text-white fa-2x"></i> </a>
